@@ -1,0 +1,5 @@
+P15NumAmbosMoto = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P15_8_Moto",fTlevels = T,fbanner = bandera1),
+P15UsoAmbosMoto = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = nombresR(datos,"Rr_P15_9_MOTO"),fTlevels = F,fbanner = bandera1),
+P15MarcaAmbosMoto = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = nombresR(datos,"P15_6_MARCA_AMBOS"),fTlevels = T,fbanner = bandera1),
+P15AmbosCategoriaMoto = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = nombresR(datos,"P15_6_CATEGORIA_AMBOS"),fTlevels = T,fbanner = bandera1),
+P15AntAmbosMoto = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = nombresR(datos,"P15_7_AMBOS"),fTlevels = T,fbanner = bandera1),
