@@ -114,6 +114,12 @@ datos<- cbind(datos, P17_b_bancor)
 P18_d_bancor<-importaAbiertas(misDatos = datos, misVaria ="P18_D_BANCO",micatalog = read.csv("Pregunta BancosDR.csv"))
 datos<- cbind(datos, P18_d_bancor)
 
+P19_b_bancor<-importaAbiertas(misDatos = datos, misVaria ="P19_B_AMBOS_BANCO",micatalog = read.csv("Pregunta BancosDR.csv"))
+datos<- cbind(datos, P19_b_bancor)
+
+
+
+
 P13ModeloLimpia<-importaAbiertas(misDatos = datos, misVaria ="P15_3_MODELO",micatalog = read.csv("Ciclo de vida autos_motos_ModeloVF.csv"))
 datos<- cbind(datos, P13ModeloLimpia)
 P10ModeloLimpia<-importaAbiertas(misDatos = datos, misVaria ="P15_10_MODELO",micatalog = read.csv("Ciclo de vida autos_motos_ModeloVF.csv"))
@@ -217,7 +223,7 @@ for(i in 1:length(listaNombres)){
 
 # Banner
 bandera1 <- c("Total","P10","F1Genero","NSE","Edad_Rango","Plaza","EdocivilHijos")
-bandera3 <- c("TOtal","P14")
+bandera3 <- c("Total","A11")
 
 nombresR(datos,"11")
 # names(datos)[1:100]
@@ -253,7 +259,7 @@ resultadosAutos <- list(
   P10 = frecuentator(fTtabla = datos,fTvariables = "P10",fTlevels = T,fbanner = bandera1),
   P15NumAutos = frecuentator(fTtabla = datos[datos$P10=="Automóvil",],fTvariables = "P15_1",fTlevels = T,fbanner = bandera1),
   P15MarcaAutos = frecuentator(fTtabla = datos[datos$P10=="Automóvil",],fTvariables = nombresR(datos,"P15_3_MARCA"),fTlevels = T,fbanner = bandera1),
-  p15Modelo = frecuentator(fTtabla = datos[datos$P10=="Automóvil",],fTvariables = nombresR(datos,"P13ModeloLimpia"),fTlevels = T,fbanner = bandera1),
+  P15Modelo = frecuentator(fTtabla = datos[datos$P10=="Automóvil",],fTvariables = nombresR(datos,"P13ModeloLimpia"),fTlevels = T,fbanner = bandera1),
   P15UsoAutos = frecuentator(fTtabla = datos[datos$P10=="Automóvil",],fTvariables = nombresR(datos,"Rr_P15_2"),fTlevels = F,fbanner = bandera1),
   P15AntAutos = frecuentator(fTtabla = datos[datos$P10=="Automóvil",],fTvariables = nombresR(datos,"P15_5"),fTlevels = T,fbanner = bandera1),
   P15PrestarAutos = frecuentator(fTtabla = datos[datos$P10=="Automóvil",],fTvariables = "P15_A",fTlevels = T,fbanner = bandera1),
@@ -309,7 +315,7 @@ resultadosAutos <- list(
   P18CBanco2 = frecuentator(fTtabla = datos[((datos$P10=="Automóvil") & (datos$P18=="Si") & (datos$P18_D_Cr_dito_personal_del_banco=="1")),],fTvariables ="P18_d_bancor",fTlevels = T,fbanner = bandera1),
   P18CBanco3 = frecuentator(fTtabla = datos[((datos$P10=="Automóvil") & (datos$P18=="Si") & (datos$P18_D_Otro__Especificar=="1")),],fTvariables ="P18_d_bancor",fTlevels = T,fbanner = bandera1),
   P18CBanco4 = frecuentator(fTtabla = datos[((datos$P10=="Automóvil") & (datos$P18=="Si") & (datos$P18_D_No_sabe__no_contest=="1")),],fTvariables ="P18_d_bancor",fTlevels = T,fbanner = bandera1),
-  p18E = frecuentator(fTtabla = datos[datos$P10=="Automóvil" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_E_")[1:13],fTlevels = F,fbanner = bandera1),
+  P18E = frecuentator(fTtabla = datos[datos$P10=="Automóvil" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_E_")[1:13],fTlevels = F,fbanner = bandera1),
   p18E1 = frecuentator(fTtabla = datos[datos$P10=="Automóvil" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_F_")[1:12],fTlevels = F,fbanner = bandera1),
   p18E2 = frecuentator(fTtabla = datos[datos$P10=="Automóvil" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_F_")[14:25],fTlevels = F,fbanner = bandera1),
   p18E3 = frecuentator(fTtabla = datos[datos$P10=="Automóvil" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_F_")[27:38],fTlevels = F,fbanner = bandera1),
@@ -351,7 +357,7 @@ resultadosMotos <- list(
   P15NoPrestarQuienMotosSol2 = frecuentator(fTtabla = datos[((datos$P10=="Moto / Motocicleta")& (datos$P15_A== "No")&(datos$P15_G=="Mamá/ Papá")),],fTvariables = (nombresR(datos,"P15_H_PAPAMAMA")[1:5]),fTlevels = F,fbanner = bandera1),
   P15NoPrestarQuienMotosSol3 = frecuentator(fTtabla = datos[((datos$P10=="Moto / Motocicleta")& (datos$P15_A== "No")&(datos$P15_G=="Hijo/hija")),],fTvariables = (nombresR(datos,"P15_H_HIJOHIJA")[1:5]),fTlevels = F,fbanner = bandera1),
   P15NoPrestarQuienMotosSol4 = frecuentator(fTtabla = datos[((datos$P10=="Moto / Motocicleta")& (datos$P15_A== "No")&(datos$P15_G=="Otro familiar")),],fTvariables = (nombresR(datos,"P15_H_OTROFAMILIAR")[1:5]),fTlevels = F,fbanner = bandera1),
-  P15Actividades1 = frecuentator(fTtabla = datos[datos$P10=="Moto / Motocicleta",],fTvariables = "P15_I_La_uso_para_ir_a_trabajar",fTlevels = T,fbanner = bandera1),
+  P15Actividades1 = frecuentator(fTtabla = datos[datos$P10=="Moto / Motocicleta",],fTvariables = "P15_I_La_uso_para_ir_a_trabajar",fTlevels = T,fbanner = bandera3),
   P15Actividades2 = frecuentator(fTtabla = datos[datos$P10=="Moto / Motocicleta",],fTvariables = "P15_I_La_uso_para_ir_al_Doctor___Den",fTlevels = T,fbanner = bandera3),
   P15Actividades3 = frecuentator(fTtabla = datos[datos$P10=="Moto / Motocicleta",],fTvariables = "P15_I_La_uso_para_llevar_hijos_a_la_",fTlevels = T,fbanner = bandera3),
   P15Actividades4 = frecuentator(fTtabla = datos[datos$P10=="Moto / Motocicleta",],fTvariables = "P15_I_La_uso_para_salir_de_paseo___s",fTlevels = T,fbanner = bandera3),
@@ -416,53 +422,54 @@ exportator(resultadosMotos, "./resultados/resultadosMotos.csv")
    P16PrestarQuienAmbosAutosf2 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "Sí")&(datos$P16_B_AMBOS_Mi_Pap____Mam=="1")),],fTvariables ="P16_C_AMBOS_MAMAPAPA",fTlevels = T,fbanner = bandera1),
    P16PrestarQuienAmbosAutosf3 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "Sí")&(datos$P16_B_AMBOS_Hijos___Hijas=="1")),],fTvariables ="P16_C_AMBOS_HIJOHIJA",fTlevels = T,fbanner = bandera1),
    P16PrestarQuienAmbosAutosf4 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "Sí")&(datos$P16_B_AMBOS_Otro_familiar=="1")),],fTvariables ="P16_C_AMBOS_OTROFAMILIAR",fTlevels = T,fbanner = bandera1),
+   P16AmbosPrestarQuienAutosRazon1 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "Sí")&(datos$P16_B_AMBOS_Mi_Esposo___Esposa=="1")),],fTvariables = nombresR(datos,"P16_D_AMBOS_ESPOSAESPOSO")[1:12],fTlevels = F,fbanner = bandera1),
+   P16AmbosPrestarQuienAutosRazon2 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "Sí")&(datos$P16_B_AMBOS_Mi_Pap____Mam=="1")),],fTvariables =nombresR(datos,"P16_D_AMBOS_MAMAPA")[1:12],fTlevels = F,fbanner = bandera1),
+   P16AmbosPrestarQuienAutosRazon3 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "Sí")&(datos$P16_B_AMBOS_Hijos___Hijas=="1")),],fTvariables =nombresR(datos,"P16_D_AMBOS_HIJOHIJA")[1:12],fTlevels = F,fbanner = bandera1),
+   P16AmbosPrestarQuienAutosRazon4 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "Sí")&(datos$P16_B_AMBOS_Otro_familiar=="1")),],fTvariables =nombresR(datos,"P16_D_AMBOS_OTROFAMILIAR")[1:12],fTlevels = F,fbanner = bandera1),
+   P16NoPrestaAutosPQ = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "No")),],fTvariables ="P16_E_AMBOS",fTlevels = T,fbanner = bandera1), 
+   P16NoPrestaAutosProb = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "No")),],fTvariables ="P16_F",fTlevels = T,fbanner = bandera1),
+   P16NoPrestaAutosProbQ = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "No")&(datos$P16_F== 'Sí')),],fTvariables ="P16_G_AMBOS",fTlevels = T,fbanner = bandera1),
+   P16NoPrestarQuienAutosSol1 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "No")&(datos$P16_G=="Esposa/ Esposo")),],fTvariables = "P16_H_AMBOS_ESPOSAESPOSO",fTlevels = T,fbanner = bandera1),
+   P16NoPrestarQuienAutosSol2 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "No")&(datos$P16_G=="Mamá/ Papá")),],fTvariables = "P16_H_AMBOS_PAPAMAMA",fTlevels = T,fbanner = bandera1),
+   P16NoPrestarQuienAutosSol3 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "No")&(datos$P16_G=="Hijo/hija")),],fTvariables = "P16_H_AMBOS_HIJOHIJA",fTlevels = T,fbanner = bandera1),
+   P16NoPrestarQuienAutosSol4 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "No")&(datos$P16_G=="Otro familiar")),],fTvariables = "P16_H_AMBOS_OTROFAMILIAR",fTlevels = T,fbanner = bandera1),
+   P16Actividades1 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P17_I_AMBOS_Lo_uso_para_ir_a_trabajar",fTlevels = T,fbanner = bandera3),
+   P16Actividades2 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P17_I_AMBOS_Lo_uso_para_ir_al_Doctor___Den",fTlevels = T,fbanner = bandera3),
+   P16Actividades3 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P17_I_AMBOS_Lo_uso_para_llevar_hijos_a_la_",fTlevels = T,fbanner = bandera3),
+   P16Actividades4 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P17_I_AMBOS_Lo_uso_para_salir_de_paseo___s",fTlevels = T,fbanner = bandera3),
+   P16Actividades5 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P17_I_AMBOS_Lo_uso_para_salir_de_vacacione",fTlevels = T,fbanner = bandera3),
+   P16Actividades6 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P17_I_AMBOS_Lo_uso_para_llevar___transport",fTlevels = T,fbanner = bandera3),
+   P16Actividades7 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P17_I_AMBOS_Lo_uso_para_salir_de_fiesta",fTlevels = T,fbanner = bandera3),
+   P16Actividades8 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P17_I_AMBOS_Lo_uso_para_ir_al_s_per___merc",fTlevels = T,fbanner = bandera3),
+   P16Actividades9 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P17_I_AMBOS_Lo_uso_para_ir_al_banco",fTlevels = T,fbanner = bandera3),
+   P16Actividades10 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P17_I_AMBOS_Lo_uso_para_ir_a_la_Escuela___",fTlevels = T,fbanner = bandera3),
+   P16Actividades11 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P17_I_AMBOS_Lo_uso_para_ir_a_visitar_a_mi_",fTlevels = T,fbanner = bandera3),
+   P16InfluenciaAutos = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables =nombresR(datos,"P17_O_")[c(1,3,5,7,9,11)],fTlevels = F,fbanner = bandera1),
+   P16CompraAutos = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = nombresR(datos,"P17_P_")[c(1,3,5,7,9,11,13)],fTlevels = F,fbanner = bandera1),
+   P18 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables ="P18_AMBOS_Auto",fTlevels = T,fbanner = bandera1),
+   P18Cambio = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = nombresR(datos,"P18_A_Ambos_")[c(1,3,5,7,9,11,13,15,17,19,21,23)],fTlevels = F,fbanner = bandera1),
+   P18TransporteEficiente = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables ="P18_B_AMBOS",fTlevels = T,fbanner = bandera1),
+   P18C1 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P18_C_AMBOS_Me_da_prestigio___status",fTlevels = T,fbanner = bandera1),
+   P18C2 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P18_C_AMBOS_Me_da_tranquilidad",fTlevels = T,fbanner = bandera1),
+   P18C3 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P18_C_AMBOS_Me_da_confianza",fTlevels = T,fbanner = bandera1),
+   P18C4 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P18_C_AMBOS_Me_da_seguridad",fTlevels = T,fbanner = bandera1),
+   P18C5 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P18_C_AMBOS_Me_siento_contento__a",fTlevels = T,fbanner = bandera1),
+   P19 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables ="P19_AMBOS",fTlevels = T,fbanner = bandera1),
+   P19A = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P19_AMBOS== "Es usado")),],fTvariables ="P19_A_AMBOS",fTlevels = T,fbanner = bandera1),
+   P19B = frecuentator(fTtabla = datos[(datos$P10=="Ambas"),],fTvariables =(nombresR(datos,"P19_B_")[1:6]),fTlevels = F,fbanner = bandera1),
+   P19BBanco1 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P19_B_AMBOS_Tarjeta_de_Cr_dito=="1")),],fTvariables ="P19_b_bancor",fTlevels = T,fbanner = bandera1),
+   P19BBanco2 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P19_B_AMBOS_Cr_dito_personal_del_banco=="1")),],fTvariables ="P19_b_bancor",fTlevels = T,fbanner = bandera1),
+   P19BBanco3 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P19_B_AMBOS_Otro__Especificar=="1")),],fTvariables ="P19_b_bancor",fTlevels = T,fbanner = bandera1),
+   P19BBanco4 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P19_B_AMBOS_No_sabe__no_contest=="1")),],fTvariables ="P19_b_bancor",fTlevels = T,fbanner = bandera1),
   
   ####de aqui hacia arriba voy bien 
-  P16AmbosPrestarQuienAutosRazon1 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "Sí")&(datos$P16_B_AMBOS_Mi_Esposo___Esposa=="1")),],fTvariables = nombresR(datos,"P16_D_AMBOS_ESPOSAESPOSO")[1:12],fTlevels = F,fbanner = bandera1),
-  P16AmbosPrestarQuienAutosRazon2 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "Sí")&(datos$P16_B_AMBOS_Mi_Pap____Mam=="1")),],fTvariables =nombresR(datos,"P16_D_AMBOS_MAMAPA"),fTlevels = F,fbanner = bandera1),
-  P16AmbosPrestarQuienAutosRazon3 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "Sí")&(datos$P16_B_AMBOS_Hijos___Hijas=="1")),],fTvariables =nombresR(datos,"P16_D_AMBOS_HIJOHIJA"),fTlevels = F,fbanner = bandera1),
-  P16AmbosPrestarQuienAutosRazon4 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "Sí")&(datos$P16_B_AMBOS_Otro_familiar=="1")),],fTvariables =nombresR(datos,"P16_D_AMBOS_OTROFAMILIAR"),fTlevels = F,fbanner = bandera1),
+  
+  P19B1  = frecuentator(fTtabla = datos[datos$P10=="Ambas",], fTvariables = nombresR(datos,"P19_B_1")[1:4],fTlevels = F,fbanner = bandera1),
+  P20 = frecuentator(fTtabla = datos[datos$P10=="Ambas",], fTvariables = "P20",fTlevels = T,fbanner = bandera1),
   
   
-  P15NoPrestaAutosPQ = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "No")),],fTvariables =(nombresR(datos,"P15_E")[1:7]),fTlevels = F,fbanner = bandera1),  
-  P15NoPrestaAutosProb = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "No")),],fTvariables ="P15_F",fTlevels = F,fbanner = bandera1),
-  P15NoPrestaAutosProbQ = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "No")&(datos$P15_F== 'Sí')),],fTvariables ="P15_G",fTlevels = T,fbanner = bandera1),
-  P15NoPrestarQuienAutosSol1 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "No")&(datos$P15_G=="Esposa/ Esposo")),],fTvariables = (nombresR(datos,"P15_H_ESPOSAESPOSO")[1:5]),fTlevels = F,fbanner = bandera1),
-  P15NoPrestarQuienAutosSol2 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "No")&(datos$P15_G=="Mamá/ Papá")),],fTvariables = (nombresR(datos,"P15_H_PAPAMAMA")[1:5]),fTlevels = F,fbanner = bandera1),
-  P15NoPrestarQuienAutosSol3 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "No")&(datos$P15_G=="Hijo/hija")),],fTvariables = (nombresR(datos,"P15_H_HIJOHIJA")[1:5]),fTlevels = F,fbanner = bandera1),
-  P15NoPrestarQuienAutosSol4 = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P16_A_AMBOS== "No")&(datos$P15_G=="Otro familiar")),],fTvariables = (nombresR(datos,"P15_H_OTROFAMILIAR")[1:5]),fTlevels = F,fbanner = bandera1),
-  P15Actividades1 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P15_I_La_uso_para_ir_a_trabajar",fTlevels = T,fbanner = bandera3),
-  P15Actividades2 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P15_I_La_uso_para_ir_al_Doctor___Den",fTlevels = T,fbanner = bandera3),
-  P15Actividades3 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P15_I_La_uso_para_llevar_hijos_a_la_",fTlevels = T,fbanner = bandera3),
-  P15Actividades4 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P15_I_La_uso_para_salir_de_paseo___s",fTlevels = T,fbanner = bandera3),
-  P15Actividades5 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P15_I_La_uso_para_salir_de_vacacione",fTlevels = T,fbanner = bandera3),
-  P15Actividades6 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P15_I_La_uso_para_llevar___transport",fTlevels = T,fbanner = bandera3),
-  P15Actividades7 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P15_I_La_uso_para_salir_de_fiesta",fTlevels = T,fbanner = bandera3),
-  P15Actividades8 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P15_I_La_uso_para_ir_al_s_per___merc",fTlevels = T,fbanner = bandera3),
-  P15Actividades9 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P15_I_La_uso_para_ir_al_banco",fTlevels = T,fbanner = bandera3),
-  P15Actividades10 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P15_I_La_uso_para_ir_a_la_Escuela___",fTlevels = T,fbanner = bandera3),
-  P15Actividades11 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P15_I_La_uso_para_ir_a_visitar_a_mi_",fTlevels = T,fbanner = bandera3),
-  P15InfluenciaAutos = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables =nombresR(datos,"P15_L_"),fTlevels = F,fbanner = bandera1),
-  P15CompraAutos = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = nombresR(datos,"P15_M_"),fTlevels = F,fbanner = bandera1),
-  P16 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables ="P16",fTlevels = T,fbanner = bandera1),
-  P16Cambio = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = (nombresR(datos,"P16_A_")[1:11]),fTlevels = F,fbanner = bandera1),
-  P16TransporteEficiente = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables ="P16_B",fTlevels = T,fbanner = bandera1),
-  P16C1 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P16_C_Me_da_prestigio___status",fTlevels = T,fbanner = bandera1),
-  P16C2 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P16_C_Me_da_tranquilidad",fTlevels = T,fbanner = bandera1),
-  P16C3 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P16_C_Me_da_confianza",fTlevels = T,fbanner = bandera1),
-  P16C4 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P16_C_Me_da_seguridad",fTlevels = T,fbanner = bandera1),
-  P16C5 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P16_C_Me_siento_contento__a",fTlevels = T,fbanner = bandera1),
-  P17 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables ="P17",fTlevels = T,fbanner = bandera1),
-  P17A = frecuentator(fTtabla = datos[((datos$P10=="Ambas")& (datos$P17== "Es usado (a)")),],fTvariables ="P17_A",fTlevels = T,fbanner = bandera1),
-  P17B = frecuentator(fTtabla = datos[(datos$P10=="Ambas"),],fTvariables =(nombresR(datos,"P17_B_")[1:6]),fTlevels = F,fbanner = bandera1),
-  P17BBanco1 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P17_B_Tarjeta_de_Cr_dito=="1")),],fTvariables ="P17_b_bancor",fTlevels = T,fbanner = bandera1),
-  P17BBanco2 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P17_B_Cr_dito_personal_del_banco=="1")),],fTvariables ="P17_b_bancor",fTlevels = T,fbanner = bandera1),
-  P17BBanco3 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P17_B_Otro__Especificar=="1")),],fTvariables ="P17_b_bancor",fTlevels = T,fbanner = bandera1),
-  P17BBanco4 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P17_B_No_sabe__no_contest=="1")),],fTvariables ="P17_b_bancor",fTlevels = T,fbanner = bandera1),
-  P17B1  = frecuentator(fTtabla = datos[datos$P10=="Ambas",], fTvariables = nombresR(datos,"P17_B1"),fTlevels = F,fbanner = bandera1),
-  P18  = frecuentator(fTtabla = datos[datos$P10=="Ambas",], fTvariables = "P18",fTlevels = T,fbanner = bandera1),
-  P18C  = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P18=="Si")),], fTvariables = "P18_C",fTlevels = T,fbanner = bandera1),
-  P18D = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P18=="Si")),],fTvariables =(nombresR(datos,"P18_D_")[1:6]),fTlevels = F,fbanner = bandera1),
+  P18B  = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P20=="Si")),], fTvariables = "P20_B_AMBOS",fTlevels = T,fbanner = bandera1),
+  P18C = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P20=="Si")),],fTvariables =(nombresR(datos,"P20_C_AMBOS")[1:6]),fTlevels = F,fbanner = bandera1),
   P18CBanco1 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P18=="Si") & (datos$P18_D_Tarjeta_de_Cr_dito=="1")),],fTvariables ="P18_d_bancor",fTlevels = T,fbanner = bandera1),
   P18CBanco2 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P18=="Si") & (datos$P18_D_Cr_dito_personal_del_banco=="1")),],fTvariables ="P18_d_bancor",fTlevels = T,fbanner = bandera1),
   P18CBanco3 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P18=="Si") & (datos$P18_D_Otro__Especificar=="1")),],fTvariables ="P18_d_bancor",fTlevels = T,fbanner = bandera1),
