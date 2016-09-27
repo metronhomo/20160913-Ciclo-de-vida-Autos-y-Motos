@@ -117,7 +117,11 @@ datos<- cbind(datos, P18_d_bancor)
 P19_b_bancor<-importaAbiertas(misDatos = datos, misVaria ="P19_B_AMBOS_BANCO",micatalog = read.csv("Pregunta BancosDR.csv"))
 datos<- cbind(datos, P19_b_bancor)
 
+P20_c_bancor<-importaAbiertas(misDatos = datos, misVaria ="P20_C_AMBOS_BANCO",micatalog = read.csv("Pregunta BancosDR.csv"))
+datos<- cbind(datos, P20_c_bancor)
 
+P20_e_bancor<-importaAbiertas(misDatos = datos, misVaria ="P19_E_AMBOS_BANCO",micatalog = read.csv("Pregunta BancosDR.csv"))
+datos<- cbind(datos, P20_e_bancor)
 
 
 P13ModeloLimpia<-importaAbiertas(misDatos = datos, misVaria ="P15_3_MODELO",micatalog = read.csv("Ciclo de vida autos_motos_ModeloVF.csv"))
@@ -444,6 +448,9 @@ exportator(resultadosMotos, "./resultados/resultadosMotos.csv")
    P16Actividades9 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P17_I_AMBOS_Lo_uso_para_ir_al_banco",fTlevels = T,fbanner = bandera3),
    P16Actividades10 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P17_I_AMBOS_Lo_uso_para_ir_a_la_Escuela___",fTlevels = T,fbanner = bandera3),
    P16Actividades11 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P17_I_AMBOS_Lo_uso_para_ir_a_visitar_a_mi_",fTlevels = T,fbanner = bandera3),
+   P17Preferencia = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = "P17_K_AMBOS",fTlevels = T,fbanner = bandera1),
+   P17PREFERENCIAAUTOS= frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables =nombresR(datos,"P17_L_AMBOS")[1:8],fTlevels = F,fbanner = bandera1),
+   
    P16InfluenciaAutos = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables =nombresR(datos,"P17_O_")[c(1,3,5,7,9,11)],fTlevels = F,fbanner = bandera1),
    P16CompraAutos = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables = nombresR(datos,"P17_P_")[c(1,3,5,7,9,11,13)],fTlevels = F,fbanner = bandera1),
    P18 = frecuentator(fTtabla = datos[datos$P10=="Ambas",],fTvariables ="P18_AMBOS_Auto",fTlevels = T,fbanner = bandera1),
@@ -461,46 +468,33 @@ exportator(resultadosMotos, "./resultados/resultadosMotos.csv")
    P19BBanco2 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P19_B_AMBOS_Cr_dito_personal_del_banco=="1")),],fTvariables ="P19_b_bancor",fTlevels = T,fbanner = bandera1),
    P19BBanco3 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P19_B_AMBOS_Otro__Especificar=="1")),],fTvariables ="P19_b_bancor",fTlevels = T,fbanner = bandera1),
    P19BBanco4 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P19_B_AMBOS_No_sabe__no_contest=="1")),],fTvariables ="P19_b_bancor",fTlevels = T,fbanner = bandera1),
-  
-  ####de aqui hacia arriba voy bien 
-  
-  P19B1  = frecuentator(fTtabla = datos[datos$P10=="Ambas",], fTvariables = nombresR(datos,"P19_B_1")[1:4],fTlevels = F,fbanner = bandera1),
-  P20 = frecuentator(fTtabla = datos[datos$P10=="Ambas",], fTvariables = "P20",fTlevels = T,fbanner = bandera1),
-  
-  
-  P18B  = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P20=="Si")),], fTvariables = "P20_B_AMBOS",fTlevels = T,fbanner = bandera1),
-  P18C = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P20=="Si")),],fTvariables =(nombresR(datos,"P20_C_AMBOS")[1:6]),fTlevels = F,fbanner = bandera1),
-  P18CBanco1 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P18=="Si") & (datos$P18_D_Tarjeta_de_Cr_dito=="1")),],fTvariables ="P18_d_bancor",fTlevels = T,fbanner = bandera1),
-  P18CBanco2 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P18=="Si") & (datos$P18_D_Cr_dito_personal_del_banco=="1")),],fTvariables ="P18_d_bancor",fTlevels = T,fbanner = bandera1),
-  P18CBanco3 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P18=="Si") & (datos$P18_D_Otro__Especificar=="1")),],fTvariables ="P18_d_bancor",fTlevels = T,fbanner = bandera1),
-  P18CBanco4 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P18=="Si") & (datos$P18_D_No_sabe__no_contest=="1")),],fTvariables ="P18_d_bancor",fTlevels = T,fbanner = bandera1),
-  p18E = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_E_")[1:13],fTlevels = F,fbanner = bandera1),
-  p18E1 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_F_")[1:12],fTlevels = F,fbanner = bandera1),
-  p18E2 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_F_")[14:25],fTlevels = F,fbanner = bandera1),
-  p18E3 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_F_")[27:38],fTlevels = F,fbanner = bandera1),
-  p18E4 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_F_")[40:51],fTlevels = F,fbanner = bandera1),
-  p18E5 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_F_")[53:64],fTlevels = F,fbanner = bandera1),
-  p18E6 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_F_")[66:77],fTlevels = F,fbanner = bandera1),
-  p18E7 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_F_")[79:90],fTlevels = F,fbanner = bandera1),
-  p18E8 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_F_")[92:103],fTlevels = F,fbanner = bandera1),
-  p18E10 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_F_")[105:116],fTlevels = F,fbanner = bandera1),
-  p18E11 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_F_")[118:129],fTlevels = F,fbanner = bandera1),
-  p18E12 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_F_")[131:142],fTlevels = F,fbanner = bandera1),
-  p18E13 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_F_")[144:155],fTlevels = F,fbanner = bandera1),
-  p18E14 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P18_F_")[157:168],fTlevels = F,fbanner = bandera1)
+   P19B1  = frecuentator(fTtabla = datos[datos$P10=="Ambas",], fTvariables = nombresR(datos,"P19_B_1")[1:4],fTlevels = F,fbanner = bandera1),
+   P20 = frecuentator(fTtabla = datos[datos$P10=="Ambas",], fTvariables = "P20",fTlevels = T,fbanner = bandera1),
+   P18B  = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P20=="Si")),], fTvariables = "P20_B_AMBOS",fTlevels = T,fbanner = bandera1),
+   P18C = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P20=="Si")),],fTvariables =(nombresR(datos,"P20_C_AMBOS")[1:6]),fTlevels = F,fbanner = bandera1),
+   AP20CaBanco1 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P20=="Si") & (datos$P20_C_AMBOS_Tarjeta_de_Cr_dito=="1")),],fTvariables ="P20_c_bancor",fTlevels = T,fbanner = bandera1),
+   AP20CBanco2 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P20=="Si") & (datos$P20_C_AMBOS_Cr_dito_personal_del_banco=="1")),],fTvariables ="P20_c_bancor",fTlevels = T,fbanner = bandera1),
+   AP20CBanco3 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P20=="Si") & (datos$P20_C_AMBOS_Otro__Especificar=="1")),],fTvariables ="P20_c_bancor",fTlevels = T,fbanner = bandera1),
+   AP20CBanco4 = frecuentator(fTtabla = datos[((datos$P10=="Ambas") & (datos$P20=="Si") & (datos$P20_C_AMBOS_No_sabe__no_contest=="1")),],fTvariables ="P20_c_bancor",fTlevels = T,fbanner = bandera1),
+   Ap18E = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P20=="Si",], fTvariables =nombresR(datos,"P20_D_")[1:12],fTlevels = F,fbanner = bandera1),
+   Ap18E1 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P20_E_")[1:12],fTlevels = F,fbanner = bandera1),
+   Ap18E2 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P20_E_")[14:25],fTlevels = F,fbanner = bandera1),
+   Ap18E3 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P20_E_")[27:38],fTlevels = F,fbanner = bandera1),
+   Ap18E4 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P20_E_")[40:51],fTlevels = F,fbanner = bandera1),
+   Ap18E5 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P20_E_")[53:64],fTlevels = F,fbanner = bandera1),
+   Ap18E6 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P20_E_")[66:77],fTlevels = F,fbanner = bandera1),
+   Ap18E7 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P20_E_")[79:90],fTlevels = F,fbanner = bandera1),
+   Ap18E8 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P20_E_")[92:103],fTlevels = F,fbanner = bandera1),
+   Ap18E10 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P20_E_")[105:116],fTlevels = F,fbanner = bandera1),
+   Ap18E11 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P20_E_")[118:129],fTlevels = F,fbanner = bandera1),
+   Ap18E12 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P20_E_")[131:142],fTlevels = F,fbanner = bandera1),
+   Ap18E13 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P20_E_")[144:155],fTlevels = F,fbanner = bandera1),
+   Ap18E14 = frecuentator(fTtabla = datos[datos$P10=="Ambas" & datos$P18=="Si",], fTvariables =nombresR(datos,"P20_E_")[157:168],fTlevels = F,fbanner = bandera1)
 
-   
-   
-   
-   
-   
-    )
+   )
  
  exportator(resultadosAmbos, "./resultados/resultadosAmbos.csv")
  
    
-
-
-
-
-names(datos$p17)
+  
+  ####de aqui hacia arriba voy bien
