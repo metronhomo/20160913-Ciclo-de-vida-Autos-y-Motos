@@ -564,6 +564,7 @@ resultadosAmbosMotos<- list(
 )
 
 exportator(resultadosAmbosMotos, "./resultados/resultadosAmbosMotos.csv")
+
 ###fUNCIONES PARA MD---------
 
 nombresMaxDiff<-function(x,y,z,p){
@@ -577,7 +578,13 @@ nombresMaxDiff<-function(x,y,z,p){
   }
   return((x))}
 
-
+#Funcion que quita NA
+qna <- function(var){
+  b <- as.character(var)
+  b[which(is.na(b))] <- "0"
+  b <- factor(b)
+  return(b)
+}
 
 ##Maxdiff1------------
 
@@ -589,13 +596,7 @@ MaxDiff<- datos %>%
 names(MaxDiff)
 
 ##Cambio los NA por 0
-#Funcion que quita NA
-qna <- function(var){
-  b <- as.character(var)
-  b[which(is.na(b))] <- "0"
-  b <- factor(b)
-  return(b)
-}
+
 
 for (k in 1:ncol(MaxDiff)){
   MaxDiff[[k]] <- qna(var = MaxDiff[[k]])
@@ -1549,15 +1550,14 @@ names(MaxDiff)
 #incializo el data frame
 b<-MaxDiff
 ## el 18 es de numero de BLOQUES por dos
-nombres<-paste0('v',1:18)
+
+nombres<-paste0('v',1:2)
 a<-data.frame(as.factor(nombres))
 a<-cbind(a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a)
 a<-a[0,]
 names(a)<-paste0('v',1:18)
 a<-a %>%
   mutate_each(funs(as.character))
-
-names(a)<-paste0('v',1:18)
 
 #lleno el data frame
 names(b)<-str_sub(names(b),3,-1)
